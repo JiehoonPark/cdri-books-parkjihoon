@@ -12,19 +12,21 @@ interface SearchBarProps {
 }
 
 export function SearchBar({ onAdvancedSubmit }: SearchBarProps) {
-  const { query, submit } = useSearchQuery();
+  const { query, target, submit } = useSearchQuery();
   const addKeyword = useRecentKeywordsStore((state) => state.add);
   const keywordCount = useRecentKeywordsStore(
     (state) => state.keywords.length,
   );
-  const [input, setInput] = useState(query);
+  const [input, setInput] = useState(target ? '' : query);
   const [focused, setFocused] = useState(false);
   const [advancedOpen, setAdvancedOpen] = useState(false);
   const inputWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setInput(query);
-  }, [query]);
+    // 상세 검색(target 설정) 중엔 기본 input 비움
+    // → 전체 검색과 상세 검색이 동시에 표시되지 않음
+    setInput(target ? '' : query);
+  }, [query, target]);
 
   useEffect(() => {
     if (!focused) return;
