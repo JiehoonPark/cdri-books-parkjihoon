@@ -1,5 +1,5 @@
 import type { KakaoBook } from '../../../entities/book/types';
-import { BookListItem } from '../../../entities/book/ui/BookListItem';
+import { BookRow } from '../../../entities/book/ui/BookRow';
 import { EmptyState } from '../../../shared/ui/EmptyState';
 import { BookListItemSkeleton } from './BookListItemSkeleton';
 
@@ -28,11 +28,7 @@ export function SearchResultList({ documents, isLoading }: SearchResultListProps
   return (
     <ul aria-label="도서 검색 결과">
       {documents.map((book) => (
-        <BookListItem
-          key={book.isbn || book.url}
-          book={book}
-          onExpand={() => undefined}
-        />
+        <BookRow key={book.isbn || book.url} book={book} />
       ))}
     </ul>
   );
