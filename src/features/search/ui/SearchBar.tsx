@@ -56,7 +56,10 @@ export function SearchBar({ onAdvancedClick }: SearchBarProps) {
     >
       <div ref={wrapperRef} className="relative">
         <div className="flex h-[50px] w-[480px] items-center gap-[11px] rounded-full bg-light-gray px-5">
-          <SearchIcon size={20} className="text-text-primary" />
+          <SearchIcon
+            size={20}
+            className="pointer-events-none text-text-primary"
+          />
           <input
             value={input}
             onChange={(event) => setInput(event.target.value)}
