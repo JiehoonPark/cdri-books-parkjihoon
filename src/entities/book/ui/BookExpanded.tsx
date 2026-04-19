@@ -1,5 +1,6 @@
 import { memo, type ReactNode } from 'react';
 import type { KakaoBook } from '../types';
+import { formatAuthors } from '../lib/formatAuthors';
 import { BookThumbnail } from './BookThumbnail';
 import { BookPrice } from './BookPrice';
 import { Button } from '../../../shared/ui/Button';
@@ -34,8 +35,8 @@ function BookExpandedView({ book, wishSlot, onCollapse }: BookExpandedProps) {
               <h3 className="text-[18px] leading-[26px] font-bold text-text-primary">
                 {book.title}
               </h3>
-              <span className="text-[14px] leading-[22px] font-medium text-text-subtitle">
-                {book.authors.join(', ')}
+              <span className="truncate text-[14px] leading-[22px] font-medium text-text-subtitle">
+                {formatAuthors(book.authors)}
               </span>
             </div>
             <Button

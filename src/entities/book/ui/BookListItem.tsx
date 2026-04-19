@@ -1,6 +1,7 @@
 import { memo, type ReactNode } from 'react';
 import type { KakaoBook } from '../types';
 import { formatPrice } from '../lib/formatPrice';
+import { formatAuthors } from '../lib/formatAuthors';
 import { BookThumbnail } from './BookThumbnail';
 import { Button } from '../../../shared/ui/Button';
 import { ChevronDown } from '../../../shared/ui/icons';
@@ -30,8 +31,8 @@ function BookListItemView({ book, wishSlot, onExpand }: BookListItemProps) {
 
         <div className="flex min-w-0 flex-1 items-baseline gap-4">
           <h3 className="truncate text-title3 text-text-primary">{book.title}</h3>
-          <span className="shrink-0 text-body2 text-text-secondary">
-            {book.authors.join(', ')}
+          <span className="shrink-0 max-w-[40%] truncate text-body2 text-text-secondary">
+            {formatAuthors(book.authors)}
           </span>
         </div>
 
