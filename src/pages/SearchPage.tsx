@@ -35,7 +35,7 @@ export function SearchPage() {
 
   return (
     <section aria-label="도서 검색">
-      <h1 className="text-title2 text-text-title">도서 검색</h1>
+      <h1 className="h-9 text-title2 text-text-title">도서 검색</h1>
       <div className="mt-4">
         <SearchBar
           onAdvancedSubmit={(nextTarget, nextQuery) =>
@@ -44,7 +44,7 @@ export function SearchPage() {
         />
       </div>
       {query && (
-        <div className="mt-10 space-y-6">
+        <div className="mt-6 space-y-9">
           <SearchResultCount label="도서 검색 결과" total={totalCount} />
           {isError ? (
             <ErrorState onRetry={() => refetch()} />

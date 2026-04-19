@@ -48,7 +48,7 @@ function BookExpandedView({ book, wishSlot, onCollapse }: BookExpandedProps) {
             </Button>
           </div>
 
-          <section className="mt-6 flex-1 overflow-hidden">
+          <section className="mt-4 flex-1 overflow-hidden">
             <h4 className="text-[14px] leading-[26px] font-bold text-text-primary">
               책 소개
             </h4>

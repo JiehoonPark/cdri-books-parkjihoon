@@ -67,8 +67,8 @@ export function SearchBar({ onAdvancedSubmit }: SearchBarProps) {
       aria-label="도서 검색"
       className="flex items-start gap-4"
     >
-      <div ref={inputWrapperRef} className="relative">
-        <div className="w-[480px] overflow-hidden rounded-[25px] bg-light-gray">
+      <div ref={inputWrapperRef} className="relative h-[50px] w-[480px]">
+        <div className="absolute left-0 top-0 z-30 w-full overflow-hidden rounded-[25px] bg-light-gray">
           <div className="flex h-[50px] items-center gap-[11px] px-5">
             <SearchIcon
               size={20}
