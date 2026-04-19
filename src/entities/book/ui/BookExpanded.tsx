@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { memo, type ReactNode } from 'react';
 import type { KakaoBook } from '../types';
 import { BookThumbnail } from './BookThumbnail';
 import { BookPrice } from './BookPrice';
@@ -12,7 +12,7 @@ interface BookExpandedProps {
   onCollapse: () => void;
 }
 
-export function BookExpanded({ book, wishSlot, onCollapse }: BookExpandedProps) {
+function BookExpandedView({ book, wishSlot, onCollapse }: BookExpandedProps) {
   const handleBuy = () => openExternalLink(book.url);
 
   return (
@@ -69,3 +69,5 @@ export function BookExpanded({ book, wishSlot, onCollapse }: BookExpandedProps) 
     </li>
   );
 }
+
+export const BookExpanded = memo(BookExpandedView);
