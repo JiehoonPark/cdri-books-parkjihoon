@@ -29,8 +29,8 @@ export function SearchBar({ onAdvancedClick }: SearchBarProps) {
       aria-label="도서 검색"
       className="flex items-center gap-4"
     >
-      <div className="flex h-[50px] w-[480px] items-center gap-[11px] rounded-full bg-light-gray pl-[10px] pr-4">
-        <SearchIcon size={30} className="text-text-primary" />
+      <div className="flex h-[50px] w-[480px] items-center gap-[11px] rounded-full bg-light-gray pl-5 pr-5">
+        <SearchIcon size={20} className="text-text-primary" />
         <input
           value={input}
           onChange={(event) => setInput(event.target.value)}
