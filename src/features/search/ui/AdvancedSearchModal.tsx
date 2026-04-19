@@ -1,4 +1,9 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from 'react';
 import { Button } from '../../../shared/ui/Button';
 import { CloseIcon, ChevronDown } from '../../../shared/ui/icons';
 import type { BookSearchTarget } from '../../../entities/book/types';
@@ -55,7 +60,7 @@ export function AdvancedSearchModal({
     onClose();
   };
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: ReactKeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       handleSubmit();
@@ -71,7 +76,7 @@ export function AdvancedSearchModal({
       role="dialog"
       aria-modal="true"
       aria-label="상세 검색"
-      className="absolute right-0 top-full z-50 mt-3 w-[360px] rounded-lg bg-white p-6 shadow-[0_4px_14px_6px_rgba(151,151,151,0.15)]"
+      className="absolute left-1/2 top-full z-50 mt-3 w-[360px] -translate-x-1/2 rounded-lg bg-white p-6 shadow-[0_4px_14px_6px_rgba(151,151,151,0.15)]"
     >
       <button
         type="button"
