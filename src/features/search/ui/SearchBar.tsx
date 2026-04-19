@@ -4,17 +4,20 @@ import { Button } from '../../../shared/ui/Button';
 import { useSearchQuery } from '../model/useSearchQuery';
 import { useRecentKeywordsStore } from '../model/recentKeywordsStore';
 import { RecentKeywordsDropdown } from './RecentKeywordsDropdown';
+import { AdvancedSearchModal } from './AdvancedSearchModal';
+import type { BookSearchTarget } from '../../../entities/book/types';
 
 interface SearchBarProps {
-  onAdvancedClick?: () => void;
+  onAdvancedSubmit?: (target: BookSearchTarget, query: string) => void;
 }
 
-export function SearchBar({ onAdvancedClick }: SearchBarProps) {
+export function SearchBar({ onAdvancedSubmit }: SearchBarProps) {
   const { query, submit } = useSearchQuery();
   const addKeyword = useRecentKeywordsStore((state) => state.add);
   const [input, setInput] = useState(query);
   const [focused, setFocused] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [advancedOpen, setAdvancedOpen] = useState(false);
+  const inputWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setInput(query);
@@ -24,8 +27,8 @@ export function SearchBar({ onAdvancedClick }: SearchBarProps) {
     if (!focused) return;
     const handleClick = (event: MouseEvent) => {
       if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(event.target as Node)
+        inputWrapperRef.current &&
+        !inputWrapperRef.current.contains(event.target as Node)
       ) {
         setFocused(false);
       }
@@ -47,6 +50,11 @@ export function SearchBar({ onAdvancedClick }: SearchBarProps) {
     executeSearch(input);
   };
 
+  const handleAdvancedSubmit = (target: BookSearchTarget, keyword: string) => {
+    addKeyword(keyword);
+    onAdvancedSubmit?.(target, keyword);
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -54,7 +62,7 @@ export function SearchBar({ onAdvancedClick }: SearchBarProps) {
       aria-label="도서 검색"
       className="flex items-center gap-4"
     >
-      <div ref={wrapperRef} className="relative">
+      <div ref={inputWrapperRef} className="relative">
         <div className="flex h-[50px] w-[480px] items-center gap-[11px] rounded-full bg-light-gray px-5">
           <SearchIcon
             size={20}
@@ -78,15 +86,24 @@ export function SearchBar({ onAdvancedClick }: SearchBarProps) {
           />
         )}
       </div>
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        onClick={onAdvancedClick}
-        aria-label="상세 검색 열기"
-      >
-        상세검색
-      </Button>
+      <div className="relative">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={() => setAdvancedOpen((prev) => !prev)}
+          aria-label="상세 검색 열기"
+          aria-expanded={advancedOpen}
+        >
+          상세검색
+        </Button>
+        {advancedOpen && (
+          <AdvancedSearchModal
+            onClose={() => setAdvancedOpen(false)}
+            onSubmit={handleAdvancedSubmit}
+          />
+        )}
+      </div>
     </form>
   );
 }

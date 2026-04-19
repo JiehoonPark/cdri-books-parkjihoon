@@ -1,8 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { SearchBar } from '../features/search/ui/SearchBar';
 import { SearchResultCount } from '../features/search/ui/SearchResultCount';
 import { SearchResultList } from '../features/search/ui/SearchResultList';
-import { AdvancedSearchModal } from '../features/search/ui/AdvancedSearchModal';
 import { useSearchQuery } from '../features/search/model/useSearchQuery';
 import { useBookSearch } from '../features/search/model/useBookSearch';
 import { useInfiniteScroll } from '../features/search/model/useInfiniteScroll';
@@ -11,7 +10,6 @@ import { Skeleton } from '../shared/ui/Skeleton';
 
 export function SearchPage() {
   const { query, target, submit } = useSearchQuery();
-  const [modalOpen, setModalOpen] = useState(false);
   const {
     data,
     isFetching,
@@ -38,16 +36,12 @@ export function SearchPage() {
   return (
     <section aria-label="도서 검색">
       <h1 className="text-title2 text-text-title">도서 검색</h1>
-      <div className="relative mt-4">
-        <SearchBar onAdvancedClick={() => setModalOpen(true)} />
-        {modalOpen && (
-          <AdvancedSearchModal
-            onClose={() => setModalOpen(false)}
-            onSubmit={(nextTarget, nextQuery) =>
-              submit({ query: nextQuery, target: nextTarget })
-            }
-          />
-        )}
+      <div className="mt-4">
+        <SearchBar
+          onAdvancedSubmit={(nextTarget, nextQuery) =>
+            submit({ query: nextQuery, target: nextTarget })
+          }
+        />
       </div>
       {query && (
         <div className="mt-10 space-y-6">
@@ -67,7 +61,6 @@ export function SearchPage() {
                     <div
                       aria-busy="true"
                       aria-label="다음 페이지 불러오는 중"
-                      className="space-y-0"
                     >
                       <Skeleton className="h-[100px]" />
                     </div>
