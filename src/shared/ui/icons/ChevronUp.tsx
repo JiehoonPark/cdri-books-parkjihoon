@@ -1,6 +1,6 @@
 import type { IconProps } from './types';
 
-export function ChevronUp({ size = 16, ...props }: IconProps) {
+export function ChevronUp({ size = 14, ...props }: IconProps) {
   return (
     <svg
       width={size}

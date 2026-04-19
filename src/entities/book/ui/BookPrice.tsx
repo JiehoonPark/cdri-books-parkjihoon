@@ -28,7 +28,7 @@ export function BookPrice({ price, salePrice }: BookPriceProps) {
   }
 
   return (
-    <div className="flex flex-col items-end gap-2">
+    <div className="flex flex-col items-end gap-[14px]">
       <div className="flex items-baseline gap-2">
         <PriceLabel>원가</PriceLabel>
         <span
