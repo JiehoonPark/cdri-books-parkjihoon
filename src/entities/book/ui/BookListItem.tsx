@@ -16,8 +16,7 @@ function BookListItemView({ book, wishSlot, onExpand }: BookListItemProps) {
   const handleBuy = () => openExternalLink(book.url);
 
   return (
-    <li className="border-b border-divider">
-      <div className="flex h-[100px] items-center gap-12 pl-12 pr-4">
+    <div className="flex h-[100px] items-center gap-12 pl-12 pr-4">
         <div className="relative shrink-0">
           <BookThumbnail
             src={book.thumbnail}
@@ -45,8 +44,7 @@ function BookListItemView({ book, wishSlot, onExpand }: BookListItemProps) {
             <ChevronDown className="text-ui-gray" />
           </Button>
         </div>
-      </div>
-    </li>
+    </div>
   );
 }
 

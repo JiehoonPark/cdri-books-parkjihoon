@@ -16,8 +16,7 @@ function BookExpandedView({ book, wishSlot, onCollapse }: BookExpandedProps) {
   const handleBuy = () => openExternalLink(book.url);
 
   return (
-    <li className="border-b border-divider">
-      <div className="flex gap-8 py-6 pl-[54px] pr-5">
+    <div className="flex gap-8 py-6 pl-[54px] pr-5">
         <div className="relative shrink-0">
           <BookThumbnail
             src={book.thumbnail}
@@ -65,8 +64,7 @@ function BookExpandedView({ book, wishSlot, onCollapse }: BookExpandedProps) {
             </Button>
           </div>
         </div>
-      </div>
-    </li>
+    </div>
   );
 }
 
