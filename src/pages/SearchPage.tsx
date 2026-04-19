@@ -5,8 +5,9 @@ import { SearchResultList } from '../features/search/ui/SearchResultList';
 import { AdvancedSearchModal } from '../features/search/ui/AdvancedSearchModal';
 import { useSearchQuery } from '../features/search/model/useSearchQuery';
 import { useBookSearch } from '../features/search/model/useBookSearch';
-import { Button } from '../shared/ui/Button';
+import { useInfiniteScroll } from '../features/search/model/useInfiniteScroll';
 import { ErrorState } from '../shared/ui/ErrorState';
+import { Skeleton } from '../shared/ui/Skeleton';
 
 export function SearchPage() {
   const { query, target, submit } = useSearchQuery();
@@ -27,6 +28,12 @@ export function SearchPage() {
   );
   const totalCount = data?.pages[0]?.meta.total_count ?? 0;
   const isLoadingInitial = isFetching && !data;
+
+  const sentinelRef = useInfiniteScroll({
+    hasNextPage: Boolean(hasNextPage),
+    isFetchingNextPage,
+    fetchNextPage,
+  });
 
   return (
     <section aria-label="도서 검색">
@@ -54,15 +61,18 @@ export function SearchPage() {
                 isLoading={isLoadingInitial}
               />
               {hasNextPage && (
-                <div className="flex justify-center pt-6">
-                  <Button
-                    variant="subtle"
-                    onClick={() => fetchNextPage()}
-                    disabled={isFetchingNextPage}
-                  >
-                    {isFetchingNextPage ? '불러오는 중...' : '더보기'}
-                  </Button>
-                </div>
+                <>
+                  <div ref={sentinelRef} aria-hidden />
+                  {isFetchingNextPage && (
+                    <div
+                      aria-busy="true"
+                      aria-label="다음 페이지 불러오는 중"
+                      className="space-y-0"
+                    >
+                      <Skeleton className="h-[100px]" />
+                    </div>
+                  )}
+                </>
               )}
             </>
           )}
