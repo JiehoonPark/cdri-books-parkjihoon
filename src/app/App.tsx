@@ -18,7 +18,7 @@ export function App() {
     <Providers>
       <div className="min-h-full bg-white">
         <AppHeader />
-        <main className="mx-auto max-w-[960px] py-20">
+        <main className="mx-auto max-w-[960px] pb-[158px] pt-20">
           <ErrorBoundary>
             <Suspense fallback={<Skeleton className="h-[200px] w-full" />}>
               <Routes>
