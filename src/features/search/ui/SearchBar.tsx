@@ -14,6 +14,9 @@ interface SearchBarProps {
 export function SearchBar({ onAdvancedSubmit }: SearchBarProps) {
   const { query, submit } = useSearchQuery();
   const addKeyword = useRecentKeywordsStore((state) => state.add);
+  const keywordCount = useRecentKeywordsStore(
+    (state) => state.keywords.length,
+  );
   const [input, setInput] = useState(query);
   const [focused, setFocused] = useState(false);
   const [advancedOpen, setAdvancedOpen] = useState(false);
@@ -55,36 +58,40 @@ export function SearchBar({ onAdvancedSubmit }: SearchBarProps) {
     onAdvancedSubmit?.(target, keyword);
   };
 
+  const showDropdown = focused && keywordCount > 0;
+
   return (
     <form
       onSubmit={handleSubmit}
       role="search"
       aria-label="도서 검색"
-      className="flex items-center gap-4"
+      className="flex items-start gap-4"
     >
       <div ref={inputWrapperRef} className="relative">
-        <div className="flex h-[50px] w-[480px] items-center gap-[11px] rounded-full bg-light-gray px-5">
-          <SearchIcon
-            size={20}
-            className="pointer-events-none text-text-primary"
-          />
-          <input
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            onFocus={() => setFocused(true)}
-            placeholder="검색어 입력"
-            aria-label="도서 검색어"
-            className="h-full flex-1 bg-transparent text-caption text-black outline-none placeholder:text-text-subtitle"
-          />
+        <div className="w-[480px] overflow-hidden rounded-[25px] bg-light-gray">
+          <div className="flex h-[50px] items-center gap-[11px] px-5">
+            <SearchIcon
+              size={20}
+              className="pointer-events-none text-text-primary"
+            />
+            <input
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              onFocus={() => setFocused(true)}
+              placeholder="검색어 입력"
+              aria-label="도서 검색어"
+              className="h-full flex-1 bg-transparent text-caption text-black outline-none placeholder:text-text-subtitle"
+            />
+          </div>
+          {showDropdown && (
+            <RecentKeywordsDropdown
+              onSelect={(keyword) => {
+                setInput(keyword);
+                executeSearch(keyword);
+              }}
+            />
+          )}
         </div>
-        {focused && (
-          <RecentKeywordsDropdown
-            onSelect={(keyword) => {
-              setInput(keyword);
-              executeSearch(keyword);
-            }}
-          />
-        )}
       </div>
       <div className="relative">
         <Button
