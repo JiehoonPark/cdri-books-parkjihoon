@@ -18,6 +18,45 @@
   --color-text-primary: #353C49;
   --color-text-secondary: #6D7582;
   --color-text-subtitle: #8D94A0;
+
+  /* Typography — Noto Sans KR */
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+
+  /* Title1: 24 / 24 / 700 */
+  --text-title1: 24px;
+  --text-title1--line-height: 24px;
+  --text-title1--font-weight: 700;
+
+  /* Title2: 22 / 24 / 700 */
+  --text-title2: 22px;
+  --text-title2--line-height: 24px;
+  --text-title2--font-weight: 700;
+
+  /* Title3: 18 / 18 / 700 */
+  --text-title3: 18px;
+  --text-title3--line-height: 18px;
+  --text-title3--font-weight: 700;
+
+  /* Body1: 20 / 20 / 500 */
+  --text-body1: 20px;
+  --text-body1--line-height: 20px;
+  --text-body1--font-weight: 500;
+
+  /* Body2: 14 / 14 / 500 */
+  --text-body2: 14px;
+  --text-body2--line-height: 14px;
+  --text-body2--font-weight: 500;
+
+  /* Caption: 16 / 16 / 500 */
+  --text-caption: 16px;
+  --text-caption--line-height: 16px;
+  --text-caption--font-weight: 500;
+
+  /* Small: 10 / 10 / 500 */
+  --text-small: 10px;
+  --text-small--line-height: 10px;
+  --text-small--font-weight: 500;
 }
 
 html,
@@ -28,6 +67,7 @@ body,
 
 body {
   margin: 0;
+  font-family: var(--font-sans);
   color: var(--color-text-primary);
   background: var(--color-white);
   -webkit-font-smoothing: antialiased;
