@@ -5,17 +5,17 @@ import { BookExpanded } from './BookExpanded';
 
 interface BookRowProps {
   book: KakaoBook;
-  wishSlot?: ReactNode;
+  renderWish?: (size: number) => ReactNode;
 }
 
-export function BookRow({ book, wishSlot }: BookRowProps) {
+export function BookRow({ book, renderWish }: BookRowProps) {
   const [expanded, setExpanded] = useState(false);
 
   if (expanded) {
     return (
       <BookExpanded
         book={book}
-        wishSlot={wishSlot}
+        wishSlot={renderWish?.(24)}
         onCollapse={() => setExpanded(false)}
       />
     );
@@ -24,7 +24,7 @@ export function BookRow({ book, wishSlot }: BookRowProps) {
   return (
     <BookListItem
       book={book}
-      wishSlot={wishSlot}
+      wishSlot={renderWish?.(16)}
       onExpand={() => setExpanded(true)}
     />
   );

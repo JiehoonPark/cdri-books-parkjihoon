@@ -1,5 +1,6 @@
 import type { KakaoBook } from '../../../entities/book/types';
 import { BookRow } from '../../../entities/book/ui/BookRow';
+import { WishButton } from '../../wishlist/ui/WishButton';
 import { EmptyState } from '../../../shared/ui/EmptyState';
 import { BookListItemSkeleton } from './BookListItemSkeleton';
 
@@ -28,7 +29,11 @@ export function SearchResultList({ documents, isLoading }: SearchResultListProps
   return (
     <ul aria-label="도서 검색 결과">
       {documents.map((book) => (
-        <BookRow key={book.isbn || book.url} book={book} />
+        <BookRow
+          key={book.isbn || book.url}
+          book={book}
+          renderWish={(size) => <WishButton book={book} size={size} />}
+        />
       ))}
     </ul>
   );
