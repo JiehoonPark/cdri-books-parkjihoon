@@ -17,7 +17,7 @@ function BookExpandedView({ book, wishSlot, onCollapse }: BookExpandedProps) {
 
   return (
     <li className="border-b border-divider">
-      <div className="flex py-6 pl-[54px] pr-[54px] gap-8">
+      <div className="flex gap-8 py-6 pl-[54px] pr-5">
         <div className="relative shrink-0">
           <BookThumbnail
             src={book.thumbnail}
@@ -53,7 +53,7 @@ function BookExpandedView({ book, wishSlot, onCollapse }: BookExpandedProps) {
             <h4 className="text-[14px] leading-[26px] font-bold text-text-primary">
               책 소개
             </h4>
-            <p className="mt-2 text-small leading-4 text-text-primary whitespace-pre-wrap">
+            <p className="mt-3 whitespace-pre-wrap text-small leading-4 text-text-primary">
               {book.contents || '소개글이 제공되지 않습니다.'}
             </p>
           </section>
