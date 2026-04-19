@@ -12,7 +12,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export function AppHeader() {
   return (
-    <header className="relative h-20 border-b border-divider bg-white">
+    <header className="relative h-20 bg-white">
       <NavLink
         to={PATHS.home}
         className="absolute left-[160px] top-1/2 -translate-y-1/2 text-title1 text-text-primary"
