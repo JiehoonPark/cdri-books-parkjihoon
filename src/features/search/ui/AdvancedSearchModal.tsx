@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { Button } from '../../../shared/ui/Button';
 import { CloseIcon, ChevronDown } from '../../../shared/ui/icons';
 import type { BookSearchTarget } from '../../../entities/book/types';
@@ -48,12 +48,18 @@ export function AdvancedSearchModal({
     };
   }, [onClose]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     const trimmed = query.trim();
     if (!trimmed) return;
     onSubmit(target, trimmed);
     onClose();
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSubmit();
+    }
   };
 
   const currentLabel =
@@ -76,7 +82,7 @@ export function AdvancedSearchModal({
         <CloseIcon size={20} />
       </button>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5">
         <div className="flex items-start gap-5">
           <div className="relative w-[100px] shrink-0">
             <button
@@ -118,6 +124,7 @@ export function AdvancedSearchModal({
             type="text"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="검색어 입력"
             aria-label="상세 검색어"
             autoFocus
@@ -125,10 +132,10 @@ export function AdvancedSearchModal({
           />
         </div>
 
-        <Button type="submit" size="sm" className="w-full">
+        <Button type="button" size="sm" className="w-full" onClick={handleSubmit}>
           검색하기
         </Button>
-      </form>
+      </div>
     </div>
   );
 }
