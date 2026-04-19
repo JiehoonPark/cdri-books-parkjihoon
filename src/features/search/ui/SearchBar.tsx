@@ -67,7 +67,7 @@ export function SearchBar({ onAdvancedSubmit }: SearchBarProps) {
       onSubmit={handleSubmit}
       role="search"
       aria-label="도서 검색"
-      className="flex items-start gap-4"
+      className="flex items-center gap-4"
     >
       <div ref={inputWrapperRef} className="relative h-[50px] w-[480px]">
         <div className="absolute left-0 top-0 z-30 w-full overflow-hidden rounded-[25px] bg-light-gray">

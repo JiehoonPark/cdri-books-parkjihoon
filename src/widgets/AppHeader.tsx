@@ -2,13 +2,30 @@ import { NavLink } from 'react-router-dom';
 import { cn } from '../shared/lib/cn';
 import { PATHS } from '../shared/routes/paths';
 
-const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  cn(
-    'flex h-full items-center text-body1 text-text-primary transition-colors',
-    isActive
-      ? 'border-b border-primary'
-      : 'border-b border-transparent hover:text-text-title',
+interface NavItemProps {
+  to: string;
+  end?: boolean;
+  children: string;
+}
+
+function NavItem({ to, end, children }: NavItemProps) {
+  return (
+    <NavLink to={to} end={end} className="flex h-full items-center">
+      {({ isActive }) => (
+        <span
+          className={cn(
+            'box-content block h-[26.67px] border-b pb-[2.33px] text-body1 text-text-primary transition-colors',
+            isActive
+              ? 'border-primary'
+              : 'border-transparent hover:text-text-title',
+          )}
+        >
+          {children}
+        </span>
+      )}
+    </NavLink>
   );
+}
 
 export function AppHeader() {
   return (
@@ -24,12 +41,10 @@ export function AppHeader() {
         aria-label="주요 메뉴"
         className="absolute left-1/2 top-0 flex h-full -translate-x-1/2 items-center gap-14"
       >
-        <NavLink to={PATHS.home} end className={navLinkClass}>
+        <NavItem to={PATHS.home} end>
           도서 검색
-        </NavLink>
-        <NavLink to={PATHS.wishlist} className={navLinkClass}>
-          내가 찜한 책
-        </NavLink>
+        </NavItem>
+        <NavItem to={PATHS.wishlist}>내가 찜한 책</NavItem>
       </nav>
     </header>
   );

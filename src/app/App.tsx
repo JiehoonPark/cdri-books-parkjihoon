@@ -5,6 +5,7 @@ import { AppHeader } from '../widgets/AppHeader';
 import { SearchPage } from '../pages/SearchPage';
 import { PATHS } from '../shared/routes/paths';
 import { ErrorBoundary } from '../shared/ui/ErrorBoundary';
+import { Skeleton } from '../shared/ui/Skeleton';
 
 const WishlistPage = lazy(() =>
   import('../pages/WishlistPage').then((module) => ({
@@ -19,7 +20,7 @@ export function App() {
         <AppHeader />
         <main className="mx-auto max-w-[960px] py-20">
           <ErrorBoundary>
-            <Suspense fallback={null}>
+            <Suspense fallback={<Skeleton className="h-[200px] w-full" />}>
               <Routes>
                 <Route path={PATHS.home} element={<SearchPage />} />
                 <Route path={PATHS.wishlist} element={<WishlistPage />} />
